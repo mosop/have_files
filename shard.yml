@@ -1,0 +1,12 @@
+name: have_files
+version: 0.1.0
+
+authors:
+  - mosop <mosop@a.b.com>
+
+license: MIT
+
+dependencies:
+  stdio:
+    github: mosop/stdio
+    version: ~> 0.1.1
