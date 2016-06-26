@@ -13,6 +13,8 @@ module HaveFiles
       tmpdir(base: @base_dir, cleanup: @cleanup) do |dir|
         diff_dir = "#{dir}/diff"
         run "git", %w(init), chdir: dir
+        run "git", %w(config user.email "test@a.b.com"), chdir: dir
+        run "git", %w(config user.name "test"), chdir: dir
         File.write "#{dir}/initial", ""
         run "git", %w(checkout -b actual), chdir: dir
         run "git", %w(add .), chdir: dir
