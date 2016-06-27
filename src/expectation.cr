@@ -10,7 +10,7 @@ module HaveFiles
     end
 
     def match(actual_dir)
-      tmpdir(base: @base_dir, cleanup: @cleanup) do |dir|
+      HaveFiles.tmpdir(base: @base_dir, cleanup: @cleanup) do |dir|
         diff_dir = "#{dir}/diff"
         run "git", %w(init), chdir: dir
         run "git", %w(config user.email "test@a.b.com"), chdir: dir
@@ -70,23 +70,6 @@ module HaveFiles
           raise a.join("\n")
         end
         io.out.gets_to_end
-      end
-    end
-
-    module C
-      lib Lib
-        fun mkdtemp(template : LibC::Char*) : Char*
-      end
-    end
-
-    def tmpdir(base : String, cleanup : Bool, &block)
-      ptmpdir = "#{base}/XXXXXX".bytes + [0_u8]
-      raise "mkdtemp() error." if C::Lib.mkdtemp(ptmpdir) == 0
-      tmpdir = String.new(ptmpdir.to_unsafe)
-      begin
-        yield tmpdir
-      ensure
-        FileUtils.rm_r(tmpdir) if cleanup
       end
     end
   end

@@ -1,5 +1,9 @@
 require "./spec_helper"
 
 it "works" do
-  (__DIR__ + "/empty_files/actual").should have_files __DIR__ + "/empty_files/expected"
+  HaveFiles.tmpdir do |expected_dir|
+    HaveFiles.tmpdir do |actual_dir|
+      actual_dir.should have_files expected_dir
+    end
+  end
 end
