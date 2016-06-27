@@ -36,13 +36,13 @@ require "spec"
 require "have_files/spec"
 
 it "may work" do
-  nil.should have_files("/path/to/expected") do |dir|
-    File.write dir + "/test.txt", "Hello, worlb!\n"
+  nil.should have_files("/path/to/expected") do |actual_dir|
+    File.write actual_dir + "/test.txt", "Hello, world!\n"
   end
 end
 ```
 
-Maybe, it fails like:
+If test fails, have_files generate a diff message like:
 
 ```
 Failures:
@@ -65,6 +65,36 @@ Failures:
 
 Finished in 203.09 milliseconds
 1 examples, 1 failures, 0 errors, 0 pending
+```
+
+## Preventing Namespace Pollution
+
+To prevent pollution of global namespace, you can directly create expectation instances.
+
+```crystal
+require "spec"
+require "have_files/expectation"
+
+it "may work" do
+  "/path/to/actual".should HaveFiles::Expectation.new("/path/to/expected")
+end
+```
+
+Or you can define the `have_files` method anywhere you like.
+
+```crystal
+require "spec"
+require "have_files/dsl"
+
+module Test
+  extend HaveFiles::Dsl
+
+  it "may work" do
+    "/path/to/actual".should have_files "/path/to/expected"
+  end
+end
+
+have_files "/path/to/expected" # => compile error
 ```
 
 ## API

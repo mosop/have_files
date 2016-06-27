@@ -1,3 +1,4 @@
+require "./have_files"
 require "stdio"
 require "file_utils"
 
