@@ -69,7 +69,7 @@ Finished in 203.09 milliseconds
 
 ## Preventing Namespace Pollution
 
-To prevent pollution of top level namespace, you can directly create expectation instances.
+To prevent pollution of top level namespace, you can directly create expectations.
 
 ```crystal
 require "spec"
