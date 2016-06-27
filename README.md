@@ -1,6 +1,6 @@
 # have_files
 
-An expectation for testing if two file trees are identical, written in the Crystal language.
+A Spec's expectation for testing if two file trees are identical, written in the Crystal language.
 
 [![Build Status](https://travis-ci.org/mosop/have_files.svg?branch=master)](https://travis-ci.org/mosop/have_files)
 
