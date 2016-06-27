@@ -114,6 +114,13 @@ If an actual value is `String`, have_files treats the value as a path of directo
 
 If an actual value is `nil`, have_files does nothing for preparing an actual file tree. However, you can specify a handler to the `block` parameter to manually prepare an actual file tree. See Usage.
 
+## Releases
+
+* v0.1.2
+  * HaveFiles::Expectation
+  * HaveFiles::Dsl
+  * fixes
+
 ## Development
 
 [WIP]
