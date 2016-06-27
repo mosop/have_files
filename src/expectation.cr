@@ -21,16 +21,26 @@ module HaveFiles
         run "git", %w(commit -m "initial"), chdir: dir
         run "git", %w(checkout -b expected), chdir: dir
         FileUtils.cp_r @expected_dir, diff_dir
-        run "git", %w(add .), chdir: dir
-        run "git", %w(commit -m "expected"), chdir: dir
+        diff = run("git", %w(--no-pager diff), chdir: dir).rstrip
+        unless diff.empty?
+          run "git", %w(add .), chdir: dir
+          run "git", %w(commit -m "expected"), chdir: dir
+        end
         run "git", %w(checkout actual), chdir: dir
-        FileUtils.cp_r actual_dir, diff_dir if actual_dir
-        Dir.mkdir_p diff_dir
+        FileUtils.rm_r diff_dir
+        if actual_dir
+          FileUtils.cp_r actual_dir, diff_dir
+        else
+          Dir.mkdir_p diff_dir
+        end
         if block = @block
           block.call diff_dir
         end
-        run "git", %w(add .), chdir: dir
-        run "git", %w(commit -m "actual"), chdir: dir
+        diff = run("git", %w(--no-pager diff), chdir: dir).rstrip
+        unless diff.empty?
+          run "git", %w(add .), chdir: dir
+          run "git", %w(commit -m "actual"), chdir: dir
+        end
         diff = run("git", %w(--no-pager diff expected actual), chdir: dir).rstrip
         diff_stat = run("git", %w(--no-pager diff expected actual --stat), chdir: dir).rstrip
         a = %w()
@@ -51,7 +61,14 @@ module HaveFiles
     def run(command, args, chdir = nil)
       Stdio.capture do |io|
         status = Process.run(command, args, shell: true, chdir: chdir, output: io.out!, error: io.err!)
-        raise io.err.gets_to_end.rstrip unless status.success?
+        unless status.success?
+          out = io.out.gets_to_end.rstrip
+          err = io.err.gets_to_end.rstrip
+          a = %w()
+          a << out unless out.empty?
+          a << err unless err.empty?
+          raise a.join("\n")
+        end
         io.out.gets_to_end
       end
     end
