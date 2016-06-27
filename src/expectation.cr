@@ -6,7 +6,11 @@ module HaveFiles
     @diff : String?
     def diff; @diff as String; end
 
-    def initialize(@expected_dir : String, @base_dir : String, @cleanup : Bool, @block : (String ->)? = nil)
+    def initialize(@expected_dir : String, @base_dir : String = "/tmp", @cleanup : Bool = true)
+      @block = nil
+    end
+
+    def initialize(@expected_dir : String, @base_dir : String = "/tmp", @cleanup : Bool = true, &@block : (String ->))
     end
 
     def match(actual_dir)
@@ -21,13 +25,13 @@ module HaveFiles
         run "git", %w(commit -m "initial"), chdir: dir
         run "git", %w(checkout -b expected), chdir: dir
         FileUtils.cp_r @expected_dir, diff_dir
-        diff = run("git", %w(--no-pager diff), chdir: dir).rstrip
+        run "git", %w(add .), chdir: dir
+        diff = run("git", %w(--no-pager diff --cached), chdir: dir).rstrip
         unless diff.empty?
-          run "git", %w(add .), chdir: dir
           run "git", %w(commit -m "expected"), chdir: dir
         end
         run "git", %w(checkout actual), chdir: dir
-        FileUtils.rm_r diff_dir
+        FileUtils.rm_r diff_dir if Dir.exists?(diff_dir)
         if actual_dir
           FileUtils.cp_r actual_dir, diff_dir
         else
@@ -36,9 +40,9 @@ module HaveFiles
         if block = @block
           block.call diff_dir
         end
-        diff = run("git", %w(--no-pager diff), chdir: dir).rstrip
+        run "git", %w(add .), chdir: dir
+        diff = run("git", %w(--no-pager diff --cached), chdir: dir).rstrip
         unless diff.empty?
-          run "git", %w(add .), chdir: dir
           run "git", %w(commit -m "actual"), chdir: dir
         end
         diff = run("git", %w(--no-pager diff expected actual), chdir: dir).rstrip
