@@ -6,7 +6,7 @@ An expectation for testing if two file trees are identical, written in the Cryst
 
 ## Requirements
 
-* Git (git diff) - is used for detecting differences.
+* Git (git diff) - is used for file comparison.
 
 ## Installation
 
@@ -73,10 +73,16 @@ Finished in 203.09 milliseconds
 
 #### Parameters
 
-* expected_dir : A path to expected file tree. (required)
-* base_dir : A base path to working directory. To execute git diff, have_files makes a uniquely-named temporary directory under this path and copy all files into the underlying directory. (default: `/tmp`)
-* cleanup : Sets whether the working directory will be deleted after test ends. (default: `true`)
-* &block : A handler for preparing actual file tree. It is called with a path to the working directory.
+* expected_dir : A path to your expected file tree. (required)
+* base_dir : A base path of working directory. To compare file trees with `git diff`, have_files makes a working directory, that is temporary and uniquely named, under this path and copies all of target files into the working directory. (default: `/tmp`)
+* cleanup : Determines whether working directory will be deleted after test ends. (default: `true`)
+* &block : A handler for preparing actual file tree. It is called with a working directory's path.
+
+#### Details
+
+If an actual value is `String`, have_files treats the value as a path of directory whose actual files. Then have_files copies the directory into a working directory and compares it to an expected file tree.
+
+If an actual value is `nil`, have_files do nothing for preparing an actual file tree. However, you can specify a handler to the `block` parameter to manually prepare an actual file tree. See Usage.
 
 ## Development
 
