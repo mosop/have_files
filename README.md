@@ -82,7 +82,7 @@ Finished in 203.09 milliseconds
 
 If an actual value is `String`, have_files treats the value as a path of directory whose actual files. Then have_files copies the directory into a working directory and compares it to an expected file tree.
 
-If an actual value is `nil`, have_files do nothing for preparing an actual file tree. However, you can specify a handler to the `block` parameter to manually prepare an actual file tree. See Usage.
+If an actual value is `nil`, have_files does nothing for preparing an actual file tree. However, you can specify a handler to the `block` parameter to manually prepare an actual file tree. See Usage.
 
 ## Development
 
