@@ -42,7 +42,7 @@ it "may work" do
 end
 ```
 
-If test fails, have_files generate a diff message like:
+If test fails, have_files generates a diff message like:
 
 ```
 Failures:
