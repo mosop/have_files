@@ -1,4 +1,4 @@
-require "./*"
+require "./have_files"
 
 module HaveFiles
   module Dsl

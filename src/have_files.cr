@@ -1,4 +1,5 @@
 require "./version"
+require "./expectation"
 
 module HaveFiles
   module C
