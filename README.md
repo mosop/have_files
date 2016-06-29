@@ -119,7 +119,6 @@ If an actual value is `nil`, have_files does nothing for preparing an actual fil
 * v0.1.2
   * HaveFiles::Expectation
   * HaveFiles::Dsl
-  * fixes
 
 ## Development
 
