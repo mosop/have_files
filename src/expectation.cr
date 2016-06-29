@@ -32,7 +32,7 @@ module HaveFiles
           run "git", %w(commit -m "expected"), chdir: dir
         end
         run "git", %w(checkout actual), chdir: dir
-        FileUtils.rm_r diff_dir if Dir.exists?(diff_dir)
+        HaveFiles.rm_r diff_dir if Dir.exists?(diff_dir)
         if actual_dir
           FileUtils.cp_r actual_dir, diff_dir
         else

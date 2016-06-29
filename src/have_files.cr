@@ -15,7 +15,23 @@ module HaveFiles
     begin
       yield tmpdir
     ensure
-      FileUtils.rm_r(tmpdir) if cleanup
+      rm_r tmpdir if cleanup
+    end
+  end
+
+  def self.rm_r(path)
+    if Dir.exists?(path) && !File.symlink?(path)
+      Dir.open(path) do |dir|
+        dir.each do |entry|
+          if entry != "." && entry != ".."
+            src = File.join(path, entry)
+            rm_r(src)
+          end
+        end
+      end
+      Dir.rmdir(path)
+    else
+      File.delete(path)
     end
   end
 end
