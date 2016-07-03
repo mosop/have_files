@@ -2,7 +2,7 @@ require "../common"
 require "stdio"
 require "file_utils"
 
-module HaveFiles
+module HaveFiles::Spec
   struct Expectation
     @diff : String?
     def diff; @diff as String; end
