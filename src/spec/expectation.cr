@@ -1,4 +1,4 @@
-require "./have_files"
+require "../common"
 require "stdio"
 require "file_utils"
 

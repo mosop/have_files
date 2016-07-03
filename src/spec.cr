@@ -1,3 +1,4 @@
-require "./*"
+require "./common"
+require "./spec/*"
 
-include HaveFiles::Dsl
+include HaveFiles::Spec::Dsl
