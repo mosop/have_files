@@ -6,16 +6,16 @@ module HaveFiles::Spec2
   class Matcher
     include ::Spec2::Matcher
 
-    @spec_expectation : ::HaveFiles::Expectation
+    @spec_expectation : ::HaveFiles::Spec::Expectation
     @expected_dir : String
     @actual : String?
 
     def initialize(@expected_dir : String, base_dir : String = "/tmp", cleanup : Bool = true)
-      @spec_expectation = ::HaveFiles::Expectation.new(@expected_dir, base_dir, cleanup)
+      @spec_expectation = ::HaveFiles::Spec::Expectation.new(@expected_dir, base_dir, cleanup)
     end
 
     def initialize(@expected_dir : String, base_dir : String = "/tmp", cleanup : Bool = true, &block : (String ->))
-      @spec_expectation = ::HaveFiles::Expectation.new(@expected_dir, base_dir, cleanup, &block)
+      @spec_expectation = ::HaveFiles::Spec::Expectation.new(@expected_dir, base_dir, cleanup, &block)
     end
 
     def match(actual)
