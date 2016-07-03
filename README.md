@@ -1,6 +1,6 @@
 # have_files
 
-A Spec's expectation for testing if two file trees are identical, written in the Crystal language.
+A Spec's expectation and a [spec2](https://github.com/waterlink/spec2.cr)'s matcher for testing if two file trees are identical, written in the Crystal language.
 
 [![Build Status](https://travis-ci.org/mosop/have_files.svg?branch=master)](https://travis-ci.org/mosop/have_files)
 
@@ -73,10 +73,10 @@ To prevent pollution of top level namespace, you can directly create expectation
 
 ```crystal
 require "spec"
-require "have_files/expectation"
+require "have_files/spec/expectation"
 
 it "may work" do
-  "/path/to/actual".should HaveFiles::Expectation.new("/path/to/expected")
+  "/path/to/actual".should HaveFiles::Spec::Expectation.new("/path/to/expected")
 end
 ```
 
@@ -84,10 +84,10 @@ Or you can define the `have_files` method anywhere you like.
 
 ```crystal
 require "spec"
-require "have_files/dsl"
+require "have_files/spec/dsl"
 
 module Test
-  extend HaveFiles::Dsl
+  extend HaveFiles::Spec::Dsl
 
   it "may work" do
     "/path/to/actual".should have_files "/path/to/expected"
@@ -95,6 +95,21 @@ module Test
 end
 
 have_files "/path/to/expected" # => compile error
+```
+
+## With spec2
+
+You can also use have_files with [spec2](https://github.com/waterlink/spec2.cr).
+
+```crystal
+require "spec2"
+require "have_files/spec2"
+
+Spec2.describe "with spec2" do
+  it "is expected to work" do
+    expect("/path/to/actual") have_files "/path/to/expected"
+  end
+end
 ```
 
 ## API
@@ -116,6 +131,10 @@ If an actual value is `nil`, have_files does nothing for preparing an actual fil
 
 ## Releases
 
+* v0.2.0
+  * (Experimental) spec2 matcher
+  * (Breaking Change) Move HaveFiles::Expectation to HaveFiles::Spec::Expectation
+  * (Breaking Change) Move HaveFiles::Dsl to HaveFiles::Spec::Dsl 
 * v0.1.2
   * HaveFiles::Expectation
   * HaveFiles::Dsl
