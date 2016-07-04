@@ -6,11 +6,9 @@ env:
   - TARGET=spec
   - TARGET=spec2
 
-# apt:
-#   packages:
-#     - crystal
-#
 before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-key adv --keyserver keys.gnupg.net --recv-keys 09617FD37CC06B54                             ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo echo "deb https://dist.crystal-lang.org/apt crystal main" > /etc/apt/sources.list.d/crystal.list; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq         ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -qq crystal; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx"   ]]; then brew update                     ; fi
