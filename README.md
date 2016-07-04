@@ -1,6 +1,6 @@
 # have_files
 
-A Spec's expectation and a [spec2](https://github.com/waterlink/spec2.cr)'s matcher for testing if two file trees are identical, written in the Crystal language.
+A Crystal expectation/matcher for testing if two file trees are identical. For Spec and spec2 both.
 
 [![Build Status](https://travis-ci.org/mosop/have_files.svg?branch=master)](https://travis-ci.org/mosop/have_files)
 
@@ -134,7 +134,7 @@ If an actual value is `nil`, have_files does nothing for preparing an actual fil
 * v0.2.0
   * (Experimental) spec2 matcher
   * (Breaking Change) Move HaveFiles::Expectation to HaveFiles::Spec::Expectation
-  * (Breaking Change) Move HaveFiles::Dsl to HaveFiles::Spec::Dsl 
+  * (Breaking Change) Move HaveFiles::Dsl to HaveFiles::Spec::Dsl
 * v0.1.2
   * HaveFiles::Expectation
   * HaveFiles::Dsl
