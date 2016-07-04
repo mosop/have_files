@@ -2,10 +2,6 @@ os:
   - linux
   - osx
 
-env:
-  - TARGET=spec
-  - TARGET=spec2
-
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-key adv --keyserver keys.gnupg.net --recv-keys 09617FD37CC06B54                               ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo "deb https://dist.crystal-lang.org/apt crystal main" | sudo tee -a /etc/apt/sources.list.d/crystal.list; fi
@@ -16,4 +12,4 @@ before_install:
 
 script:
   - crystal deps
-  - crystal run -D $TARGET spec/main_spec.cr
+  - scripts/test

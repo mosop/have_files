@@ -1,0 +1,2 @@
+crystal spec spec/spec.cr
+crystal spec spec/spec2.cr
