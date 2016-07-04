@@ -6,12 +6,16 @@ env:
   - TARGET=spec
   - TARGET=spec2
 
+apt:
+  packages:
+    - crystal
+
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq              ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -qq crystal-lang; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx"   ]]; then brew update                          ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx"   ]]; then brew install crystal-lang            ; fi
+  # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq         ; fi
+  # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -qq crystal; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx"   ]]; then brew update                     ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx"   ]]; then brew install crystal-lang       ; fi
 
 script:
   - crystal deps
-  - crystal run -D spec2 spec/main_spec.cr
+  - crystal run -D $TARGET spec/main_spec.cr
