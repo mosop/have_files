@@ -1,3 +1,5 @@
+require "./expectation"
+
 module HaveFiles::Spec
   module Dsl
     def have_files(expected_dir, base_dir = "/tmp", cleanup = true)
