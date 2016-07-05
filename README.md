@@ -1,6 +1,6 @@
 # have_files
 
-A Crystal expectation/matcher for testing if two file trees are identical. For Spec and spec2 both.
+A Crystal Spec/spec2 matcher for testing if two file trees are identical.
 
 [![Build Status](https://travis-ci.org/mosop/have_files.svg?branch=master)](https://travis-ci.org/mosop/have_files)
 
