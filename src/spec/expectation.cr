@@ -65,7 +65,7 @@ module HaveFiles::Spec
 
     def run(command, args, chdir = nil)
       Stdio.capture do |io|
-        status = Process.run(command, args, shell: true, chdir: chdir, output: io.out!, error: io.err!)
+        status = Process.run(command, args, shell: true, chdir: chdir, output: STDOUT, error: STDERR)
         unless status.success?
           out = io.out.gets_to_end.rstrip
           err = io.err.gets_to_end.rstrip
