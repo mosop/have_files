@@ -5,13 +5,9 @@ require "file_utils"
 module HaveFiles::Spec
   struct Expectation
     @diff : String?
-    def diff; @diff as String; end
+    def diff; @diff.as(String); end
 
     def initialize(@expected_dir : String, @base_dir : String = "/tmp", @cleanup : Bool = true)
-      @block = nil
-    end
-
-    def initialize(@expected_dir : String, @base_dir : String = "/tmp", @cleanup : Bool = true, &@block : (String ->))
     end
 
     def match(actual_dir)
@@ -37,9 +33,6 @@ module HaveFiles::Spec
           FileUtils.cp_r actual_dir, diff_dir
         else
           Dir.mkdir_p diff_dir
-        end
-        if block = @block
-          block.call diff_dir
         end
         run "git", %w(add .), chdir: dir
         diff = run("git", %w(--no-pager diff --cached), chdir: dir).rstrip

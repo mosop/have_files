@@ -29,19 +29,6 @@ it "may work" do
 end
 ```
 
-You can also manually write out actual files:
-
-```crystal
-require "spec"
-require "have_files/spec"
-
-it "may work" do
-  nil.should have_files("/path/to/expected") do |actual_dir|
-    File.write actual_dir + "/test.txt", "Hello, world!\n"
-  end
-end
-```
-
 If test fails, have_files generates a diff message like:
 
 ```
@@ -121,16 +108,15 @@ end
 * expected_dir : A path to your expected file tree. (required)
 * base_dir : A base path of working directory. To compare file trees with `git diff`, have_files makes a working directory, that is temporary and uniquely named, under this path and copies all of target files into the working directory. (default: `/tmp`)
 * cleanup : Determines whether working directory will be deleted after test ends. (default: `true`)
-* &block : A handler for preparing actual file tree. It is called with a working directory's path.
 
 #### Details
 
-If an actual value is `String`, have_files treats the value as a path of directory whose actual files. Then have_files copies the directory into a working directory and compares it to an expected file tree.
-
-If an actual value is `nil`, have_files does nothing for preparing an actual file tree. However, you can specify a handler to the `block` parameter to manually prepare an actual file tree. See Usage.
+have_files treats an actual value as a path of directory whose actual files. Then have_files copies the directory into a working directory and compares it to an expected file tree.
 
 ## Releases
 
+* v0.3.0
+  * (Breaking Change) nil can't be passed as an actual value any longer.
 * v0.2.0
   * (Experimental) spec2 matcher
   * (Breaking Change) Move HaveFiles::Expectation to HaveFiles::Spec::Expectation
