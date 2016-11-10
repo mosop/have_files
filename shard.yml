@@ -6,7 +6,7 @@ authors:
 
 license: MIT
 
-dependencies:
+development_dependencies:
   stdio:
     github: mosop/stdio
     version: ~> 0.1.1
