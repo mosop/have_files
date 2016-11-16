@@ -3,7 +3,7 @@ require "./version"
 module HaveFiles
   module C
     lib Lib
-      fun mkdtemp(template : LibC::Char*) : Char*
+      fun mkdtemp(template : LibC::Char*) : LibC::Char*
     end
   end
 
