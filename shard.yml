@@ -1,17 +1,17 @@
 name: have_files
-version: 0.3.3
+version: 0.3.4
 
 authors:
-  - mosop <mosop@a.b.com>
+  - mosop
 
 license: MIT
 
-crystal: 0.21.1
+crystal: 0.23.1
 
 dependencies:
   stdio:
     github: mosop/stdio
-    version: ~> 0.1.3
+    version: ~> 0.1.4
 
 development_dependencies:
   spec2:
