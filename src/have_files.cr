@@ -21,11 +21,9 @@ module HaveFiles
   def self.rm_r(path)
     if Dir.exists?(path) && !File.symlink?(path)
       Dir.open(path) do |dir|
-        dir.each do |entry|
-          if entry != "." && entry != ".."
-            src = File.join(path, entry)
-            rm_r(src)
-          end
+        dir.each_child do |entry|
+          src = File.join(path, entry)
+          rm_r(src)
         end
       end
       Dir.rmdir(path)
