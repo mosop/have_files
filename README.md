@@ -2,7 +2,7 @@
 
 A Crystal Spec/spec2 matcher for testing if two file trees are identical.
 
-[![Build Status](https://travis-ci.org/mosop/have_files.svg?branch=master)](https://travis-ci.org/mosop/have_files)
+[![CircleCI](https://circleci.com/gh/mosop/have_files.svg?style=shield)](https://circleci.com/gh/mosop/have_files)
 
 ## Requirements
 
