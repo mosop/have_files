@@ -28,7 +28,7 @@ module HaveFiles
           end
         end
       end
-      Dir.rmdir(path)
+      Dir.delete(path)
     else
       File.delete(path)
     end

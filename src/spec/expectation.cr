@@ -5,7 +5,10 @@ require "file_utils"
 module HaveFiles::Spec
   struct Expectation
     @diff : String?
-    def diff; @diff.as(String); end
+
+    def diff
+      @diff.as(String)
+    end
 
     def initialize(@expected_dir : String, @base_dir : String = "/tmp", @cleanup : Bool = true)
     end

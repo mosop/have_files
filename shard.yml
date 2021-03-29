@@ -6,7 +6,7 @@ authors:
 
 license: MIT
 
-crystal: 0.24.2
+crystal: ">= 0.24.2, < 2.0.0"
 
 dependencies:
   stdio:
